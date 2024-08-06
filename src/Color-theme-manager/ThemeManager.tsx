@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode, FC } from 'react';
+import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // Define the shape of the context
 interface ThemeContextType {
@@ -14,7 +14,7 @@ interface ThemeProviderProps {
   initialTheme?: string;
 }
 
-export const ThemeProvider: FC<ThemeProviderProps> = ({ children, initialTheme = 'light' }) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialTheme = 'light' }) => {
   const [theme, setTheme] = useState<string>(initialTheme);
 
   const toggleTheme = () => {
