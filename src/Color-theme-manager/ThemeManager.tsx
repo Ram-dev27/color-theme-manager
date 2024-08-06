@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
+import './theme.css';
 
 // Define the shape of the context
 interface ThemeContextType {
@@ -28,11 +29,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialT
   );
 };
 
-export const useTheme = (): ThemeContextType => {
+export const useTheme = () => {
   const context = useContext(ThemeContext);
-  console.log(context?.theme,"context")
   if (!context) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
-  return context;
+  const { theme, toggleTheme } = context;
+  return {
+    theme,
+    toggleTheme,
+    themeClass: `${theme}-mode`,
+  };
 };

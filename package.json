@@ -1,6 +1,6 @@
 {
   "name": "color-theme-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Manage theme of your application",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
