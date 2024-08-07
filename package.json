@@ -1,6 +1,6 @@
 {
   "name": "color-theme-manager",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Manage theme of your application",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
@@ -43,5 +43,7 @@
       "@babel/preset-env",
       "@babel/preset-react"
     ]
-  }
+  },
+  "keywords": ["react","theme","theme-color","react-plugin","theming"],
+  "repository": {"url": "https://github.com/Ram-dev27/color-theme-manager.git"}
 }
