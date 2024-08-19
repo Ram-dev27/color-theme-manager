@@ -4,6 +4,13 @@
   color: #000;
 }
 
+.light-mode tr, 
+.light-mode th,
+.light-mode td {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+
 .light-mode label,
 .light-mode h1,
 .light-mode h2,
@@ -11,7 +18,9 @@
 .light-mode h4,
 .light-mode h5,
 .light-mode h6,
-.light-mode p {
+.light-mode p,
+.light-mode th,
+.light-mode td {
   color: #000;
 }
 
@@ -21,6 +30,13 @@
   color: #fff;
 }
 
+.dark-mode tr,
+.dark-mode th,
+.dark-mode td {
+  background-color: #333 !important;
+  color: #fff !important;
+}
+
 .dark-mode label,
 .dark-mode h1,
 .dark-mode h2,
@@ -28,6 +44,8 @@
 .dark-mode h4,
 .dark-mode h5,
 .dark-mode h6,
-.dark-mode p {
+.dark-mode p, 
+.dark-mode th,
+.dark-mode td {
   color: #fff;
 }
