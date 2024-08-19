@@ -34,7 +34,8 @@ import { ThemeProvider } from "color-theme-manager";
 </ThemeProvider>
 
 ```
-Use the theme in application component
+### You can change the color of the application in two ways.
+Use the themeClass in application component
 
 ```javascript
 import { useTheme } from "color-theme-manager";
@@ -47,6 +48,23 @@ function Component(){
         <h1>Hello World</h1>
         <button onClick={toggleTheme}>Change theme</button>
       </div>
+    </>
+}
+
+```
+Use the ThemeWrapper in application component
+
+```javascript
+import { useTheme,ColorThemeWrapper } from "color-theme-manager";
+
+function Component(){
+  const { toggleTheme} = useTheme()
+ return (
+    <>
+      <ColorThemeWrapper>
+        <h1>Hello World</h1>
+        <button onClick={toggleTheme}>Change theme</button>
+      </ColorThemeWrapper>
     </>
 }
 
