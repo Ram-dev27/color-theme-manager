@@ -1,51 +1,30 @@
-/* Light mode styles */
-.light-mode {
-  background-color: #fff;
-  color: #000;
+:root {
+  --background-color: #fff;
+  --text-color: #000;
 }
 
-.light-mode tr, 
-.light-mode th,
-.light-mode td {
-  background-color: #fff !important;
-  color: #000 !important;
+.color-theme {
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-.light-mode label,
-.light-mode h1,
-.light-mode h2,
-.light-mode h3,
-.light-mode h4,
-.light-mode h5,
-.light-mode h6,
-.light-mode p,
-.light-mode th,
-.light-mode td {
-  color: #000;
+.color-theme tr,
+.color-theme th,
+.color-theme td {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
 }
 
-/* Dark mode styles */
-.dark-mode {
-  background-color: #333;
-  color: #fff;
+.color-theme label,
+.color-theme h1,
+.color-theme h2,
+.color-theme h3,
+.color-theme h4,
+.color-theme h5,
+.color-theme h6,
+.color-theme p,
+.color-theme th,
+.color-theme td {
+  color:  var(--text-color);
 }
 
-.dark-mode tr,
-.dark-mode th,
-.dark-mode td {
-  background-color: #333 !important;
-  color: #fff !important;
-}
-
-.dark-mode label,
-.dark-mode h1,
-.dark-mode h2,
-.dark-mode h3,
-.dark-mode h4,
-.dark-mode h5,
-.dark-mode h6,
-.dark-mode p, 
-.dark-mode th,
-.dark-mode td {
-  color: #fff;
-}
