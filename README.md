@@ -52,7 +52,7 @@ function Component(){
 }
 
 ```
-Use the ThemeWrapper in application component
+Use the ColorThemeWrapper in application component
 
 ```javascript
 import { useTheme,ColorThemeWrapper } from "color-theme-manager";
@@ -67,8 +67,29 @@ function Component(){
       </ColorThemeWrapper>
     </>
 }
+```
+
+Add the custom theme only in your Application
+```javascript
+import { useTheme } from "color-theme-manager";
+
+function Component(){
+  const {themeClass,setCustomThemeColor} = useTheme()
+
+  useEffect(()=>{
+    setCustomThemeColor({backgroundColor:"green",textColor:"red"})
+  },[])
+
+ return (
+    <>
+      <div className={`${themeClass} title `}>
+        <h1>Hello World</h1>
+      </div>
+    </>
+}
 
 ```
+
 ## Contributing
 We welcome contributions to improve Color Theme Manager! Please fork the repository and submit pull requests.
 
