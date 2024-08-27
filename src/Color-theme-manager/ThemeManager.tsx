@@ -1,29 +1,85 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
-import './theme.css';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
+import "./theme.css";
 
 // Define the shape of the context
 interface ThemeContextType {
   theme: string;
   toggleTheme: () => void;
+  setCustomThemeColor: (customTheme: ICustomTheme) => void;
 }
 
 // Create a context with a default value
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 interface ThemeProviderProps {
   children: ReactNode;
-  initialTheme?: string;
+  initialTheme?: "light" | "dark";
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialTheme = 'light' }) => {
+interface ICustomTheme {
+  backgroundColor: string;
+  textColor: string;
+}
+
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  initialTheme = "light",
+}) => {
   const [theme, setTheme] = useState<string>(initialTheme);
 
+  const themeColor = {
+    dark: {
+      backgroundColor: "#000",
+      textColor: "#fff",
+    },
+    light: {
+      backgroundColor: "#fff",
+      textColor: "#333",
+    },
+  };
+
+  const setThemeColor = (propertyName: string, themeColor: string) => {
+    document.documentElement.style.setProperty(propertyName, themeColor);
+  };
+
+  useEffect(() => {
+    setThemeColor(
+      "--background-color",
+      theme === "light"
+        ? themeColor.light.backgroundColor
+        : themeColor.dark.backgroundColor
+    );
+    setThemeColor(
+      "--text-color",
+      theme === "light" ? themeColor.light.textColor : themeColor.dark.textColor
+    );
+  }, [theme]);
+
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+/**
+ * The function `setCustomThemeColor` sets custom theme colors for background and text in a React
+ * application.
+ * @param {ICustomTheme} customTheme - The `customTheme` parameter is an object of type `ICustomTheme`
+ * that contains properties for defining custom theme colors.
+ */
+  const setCustomThemeColor = (customTheme: ICustomTheme) => {
+    setThemeColor("--background-color", customTheme.backgroundColor);
+    setThemeColor("--text-color", customTheme.textColor);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setCustomThemeColor }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -32,12 +88,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, initialT
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
-  const { theme, toggleTheme } = context;
+  const { theme, toggleTheme,setCustomThemeColor } = context;
   return {
     theme,
     toggleTheme,
-    themeClass: `${theme}-mode`,
+    setCustomThemeColor,
+    themeClass: "color-theme",
   };
 };
