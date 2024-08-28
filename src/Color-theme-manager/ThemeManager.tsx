@@ -7,21 +7,10 @@ import React, {
 } from "react";
 import "./theme.css";
 
-// Define the shape of the context
-interface ThemeContextType {
-  theme: string;
-  toggleTheme: () => void;
-  setCustomThemeColor: (customTheme: ICustomTheme) => void;
-}
-
-// Create a context with a default value
-export const ThemeContext = createContext<ThemeContextType | undefined>(
-  undefined
-);
 
 interface ThemeProviderProps {
   children: ReactNode;
-  initialTheme?: "light" | "dark";
+  initialTheme?: "light" | "dark" ;
 }
 
 interface ICustomTheme {
@@ -29,11 +18,28 @@ interface ICustomTheme {
   textColor: string;
 }
 
+interface IAddTheme extends ICustomTheme {
+  themeName:"string"
+}
+
+// Define the shape of the context
+interface ThemeContextType {
+  theme: string;
+  toggleTheme: () => void;
+  setCustomThemeColor: (customTheme: IAddTheme) => void;
+}
+
+// Create a context with a default value
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
+
+
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  initialTheme = "light",
+  initialTheme = 'light',
 }) => {
-  const [theme, setTheme] = useState<string>(initialTheme);
+  const [theme, setTheme] = useState<'light'|'dark'>(initialTheme);
 
   const themeColor = {
     dark: {
@@ -67,13 +73,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
-/**
- * The function `setCustomThemeColor` sets custom theme colors for background and text in a React
- * application.
- * @param {ICustomTheme} customTheme - The `customTheme` parameter is an object of type `ICustomTheme`
- * that contains properties for defining custom theme colors.
- */
+  /**
+   * The function `setCustomThemeColor` sets custom theme colors for background and text in a React
+   * application.
+   * @param {ICustomTheme} customTheme - The `customTheme` parameter is an object of type `ICustomTheme`
+   * that contains properties for defining custom theme colors.
+   */
   const setCustomThemeColor = (customTheme: ICustomTheme) => {
+    themeColor[theme].backgroundColor = customTheme.backgroundColor
+    themeColor[theme].textColor = customTheme.textColor
     setThemeColor("--background-color", customTheme.backgroundColor);
     setThemeColor("--text-color", customTheme.textColor);
   };
@@ -90,7 +98,7 @@ export const useTheme = () => {
   if (!context) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
-  const { theme, toggleTheme,setCustomThemeColor } = context;
+  const { theme, toggleTheme, setCustomThemeColor } = context;
   return {
     theme,
     toggleTheme,
